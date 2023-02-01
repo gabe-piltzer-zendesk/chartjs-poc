@@ -1,6 +1,18 @@
-# Getting Started with Create React App
+# Chart.js & react-chartjs-2 POC
+
+This POC demonstrates the feasibility of the designs for the upcoming SKU expansion project and `admin_center_framework_home` module.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Additional packages installed:
+- @types/styled-components
+- @zendeskgarden/react-theming
+- chart.js
+- chartjs-plugin-annotation
+- nanoid
+- prettier
+- react-chartjs-2
+- styled-components
 
 ## Available Scripts
 
