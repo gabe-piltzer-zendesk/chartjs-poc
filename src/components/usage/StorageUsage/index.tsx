@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import LineChart from '../../charts/LineChart';
+import ChartJSLineChart from '../../charts/ChartJS/LineChart';
 import { generateStorageUsageData, X_AXIS_LABELS } from './data';
 import { nanoid } from 'nanoid';
 import { LineChartData } from '../../../utils/types';
@@ -37,7 +37,7 @@ const StorageUsage: React.FC = () => {
   const data: LineChartData[] = [usageLineData];
 
   return (
-    <LineChart
+    <ChartJSLineChart
       data={data}
       id={chartId}
       segmentColorCallback={getSegmentColor}
@@ -46,7 +46,7 @@ const StorageUsage: React.FC = () => {
       xAxisLabel="Date"
       xAxisLabels={X_AXIS_LABELS}
       yAxisLabel="Storage"
-    ></LineChart>
+    ></ChartJSLineChart>
   );
 };
 
