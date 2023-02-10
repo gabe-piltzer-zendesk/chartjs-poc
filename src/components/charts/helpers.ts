@@ -1,4 +1,5 @@
 import { LineChartOptions } from '../../utils/types';
+import { TooltipItem } from 'chart.js';
 
 const getOptions = (
   fontWeights: any,
@@ -51,10 +52,40 @@ const getOptions = (
       text: title,
     },
     tooltip: {
+      backgroundColor: 'white',
       callbacks: {
-        title: () => '',
+        footer: (ctx: TooltipItem<'line'>[]) => {
+          const item = ctx[0];
+          return `As of ${item.label}`;
+        },
+        label: (ctx: TooltipItem<'line'>) => {
+          const value = ctx.dataset.data[ctx.dataIndex] as number;
+          const diff = value - limit;
+          if (diff > 0) {
+            return `${Math.abs(diff).toFixed(1)} GB over ${limit} GB limit`;
+          } else if (diff === 0) {
+            return `${limit} GB limit met`;
+          } else {
+            return `${Math.abs(diff).toFixed(
+              1
+            )} GB until ${limit} GB limit is met`;
+          }
+        },
+        title: (ctx: TooltipItem<'line'>[]) => {
+          const item = ctx[0];
+          return `${item.dataset.data[item.dataIndex]} GB used`;
+        },
       },
       displayColors: false,
+      bodyColor: 'black',
+      borderColor: palette.grey[400],
+      borderWidth: 1,
+      footerColor: palette.grey[600],
+      footerFont: {
+        size: 12,
+      },
+      padding: 10,
+      titleColor: palette.red[600],
     },
   },
   scales: {
