@@ -53,7 +53,7 @@ const LineChart: React.FC<LineChartProps> = ({
               borderColor: (ctx: ScriptableLineSegmentContext) =>
                 segmentColorCallback(
                   ctx.datasetIndex,
-                  ctx.p1DataIndex,
+                  ctx.p0DataIndex,
                   data,
                   palette,
                   limit

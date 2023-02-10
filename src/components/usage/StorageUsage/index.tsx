@@ -6,7 +6,11 @@ import { nanoid } from 'nanoid';
 import { DemoApp, LineChartData } from '../../../utils/types';
 import { getOptions } from '../../charts/helpers';
 import { useTheme } from 'styled-components';
-import { ScriptableContext, ScriptableLineSegmentContext } from 'chart.js';
+import {
+  ScriptableContext,
+  ScriptableLineSegmentContext,
+  Tick,
+} from 'chart.js';
 import { ChartData } from 'chart.js/dist/types';
 
 const LIMIT = 370;
@@ -86,7 +90,7 @@ const StorageUsage: React.FC<Props> = ({ demoApp }) => {
           borderColor: (ctx: ScriptableLineSegmentContext) =>
             getSegmentColor(
               ctx.datasetIndex,
-              ctx.p1DataIndex,
+              ctx.p0DataIndex,
               chartJSData,
               palette,
               LIMIT
@@ -128,6 +132,7 @@ const StorageUsage: React.FC<Props> = ({ demoApp }) => {
       {demoApp === 'REACTCHARTJS2' && (
         <ReactChartJS2LineChart
           data={reactChartJSData}
+          dir={'ltr'}
           options={options}
         ></ReactChartJS2LineChart>
       )}

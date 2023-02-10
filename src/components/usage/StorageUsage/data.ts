@@ -61,6 +61,13 @@ const oneYearMonthlyData: StorageData[] = [
     storageDate: `2022-09-01T14:48:00.000Z`,
     storageUsed: 341.2,
   },
+  // TODO - Fake datapoint, either calculated by the server or client
+  // Does hiding the tick/label throw it off?
+  {
+    id: nanoid(),
+    storageDate: `2022-09-06T14:48:00.000Z`,
+    storageUsed: 370.0,
+  },
   {
     id: nanoid(),
     storageDate: `2022-10-01T14:48:00.000Z`,

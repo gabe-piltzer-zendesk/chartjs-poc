@@ -13,23 +13,20 @@ const getOptions = (
   plugins: {
     annotation: {
       annotations: {
-        thresholdLine: {
+        limitLine: {
           type: 'line',
           yMin: limit,
           yMax: limit,
           borderColor: palette.grey[600],
           borderWidth: 2,
         },
-        thresholdLineLabel: {
+        limitLineLabel: {
           type: 'label',
           xValue: lastStorageDate,
           xAdjust: -70,
           yValue: limit + 10,
           content: `${limit} GB limit`, // Annotation labels should be dynamic, could come in with the data object
           color: palette.grey[600],
-          font: {
-            weight: fontWeights.bold,
-          },
         },
         usageLineLabel: {
           type: 'label',
