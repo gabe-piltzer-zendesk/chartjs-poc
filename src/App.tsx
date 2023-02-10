@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DEFAULT_THEME, ThemeProvider } from '@zendeskgarden/react-theming';
 import StorageUsage from './components/usage/StorageUsage';
 import styled from 'styled-components';
 import { Chart, registerables } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
+import { DemoApp } from './utils/types';
+
+const ButtonContainer = styled.div`
+  padding: 20px;
+  
+  button {
+    margin-right: 10px
+  }
+`
 
 const StorageUsageContainer = styled.div`
   padding-left: 20px;
@@ -15,22 +24,27 @@ const StorageUsageContainer = styled.div`
 `;
 
 const App: React.FC = () => {
-  const { fonts } = DEFAULT_THEME;
+    const [demoApp, setDemoApp] = useState<DemoApp>('CHARTJS');
+    const {fonts} = DEFAULT_THEME;
 
-  // Register chart components and set options for all charts
-  Chart.register(...registerables, annotationPlugin);
-  Chart.defaults.font = {
-    family: fonts.system,
-    size: 14, // Theme font sizes are strings (e.g. '14px') not numbers
-  };
+    // Register chart components and set options for all charts
+    Chart.register(...registerables, annotationPlugin);
+    Chart.defaults.font = {
+        family: fonts.system,
+        size: 14, // Theme font sizes are strings (e.g. '14px') not numbers
+    };
 
-  return (
-    <ThemeProvider theme={{ ...DEFAULT_THEME, rtl: false }}>
-      <StorageUsageContainer>
-        <StorageUsage />
-      </StorageUsageContainer>
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider theme={{...DEFAULT_THEME, rtl: false}}>
+            <ButtonContainer>
+                <button type='button' onClick={() => setDemoApp('CHARTJS')}>Chart.js</button>
+                <button type='button' onClick={() => setDemoApp('REACTCHARTJS2')}>react-chartjs-2</button>
+            </ButtonContainer>
+            <StorageUsageContainer>
+                <StorageUsage demoApp={demoApp} />
+            </StorageUsageContainer>
+        </ThemeProvider>
+    );
 };
 
 export default App;

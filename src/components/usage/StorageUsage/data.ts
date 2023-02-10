@@ -25,38 +25,77 @@ const generateStorageUsageData = (
   return data;
 };
 
-// These will be generated based on the filters and return data
-const X_AXIS_LABELS = [
-  'Nov 1, 2022',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  '10',
-  '11',
-  '12',
-  '13',
-  '14',
-  '15',
-  '16',
-  '17',
-  '18',
-  '19',
-  '20',
-  '21',
-  '22',
-  '23',
-  '24',
-  '25',
-  '26',
-  '27',
-  '28',
-  '29',
-  '30',
+const oneYearMonthlyData: StorageData[] = [
+  {
+    id: nanoid(),
+    storageDate: `2022-03-01T14:48:00.000Z`,
+    storageUsed: 230.9,
+  },
+  {
+    id: nanoid(),
+    storageDate: `2022-04-01T14:48:00.000Z`,
+    storageUsed: 242.0,
+  },
+  {
+    id: nanoid(),
+    storageDate: `2022-05-01T14:48:00.000Z`,
+    storageUsed: 255.1,
+  },
+  {
+    id: nanoid(),
+    storageDate: `2022-06-01T14:48:00.000Z`,
+    storageUsed: 289.0,
+  },
+  {
+    id: nanoid(),
+    storageDate: `2022-07-01T14:48:00.000Z`,
+    storageUsed: 300.9,
+  },
+  {
+    id: nanoid(),
+    storageDate: `2022-08-01T14:48:00.000Z`,
+    storageUsed: 312.8,
+  },
+  {
+    id: nanoid(),
+    storageDate: `2022-09-01T14:48:00.000Z`,
+    storageUsed: 341.2,
+  },
+  {
+    id: nanoid(),
+    storageDate: `2022-10-01T14:48:00.000Z`,
+    storageUsed: 375.3,
+  },
+  {
+    id: nanoid(),
+    storageDate: `2022-11-01T14:48:00.000Z`,
+    storageUsed: 398.0,
+  },
+  {
+    id: nanoid(),
+    storageDate: `2022-12-01T14:48:00.000Z`,
+    storageUsed: 409.7,
+  },
+  {
+    id: nanoid(),
+    storageDate: `2023-01-01T14:48:00.000Z`,
+    storageUsed: 422.6,
+  },
+  {
+    id: nanoid(),
+    storageDate: `2023-02-01T14:48:00.000Z`,
+    storageUsed: 458.2,
+  },
+  {
+    id: nanoid(),
+    storageDate: `2023-03-01T14:48:00.000Z`,
+    storageUsed: 478.5,
+  },
+  {
+    id: nanoid(),
+    storageDate: `2023-03-12T14:48:00.000Z`,
+    storageUsed: 483.5,
+  },
 ];
 
-export { generateStorageUsageData, X_AXIS_LABELS };
+export { generateStorageUsageData, oneYearMonthlyData };
