@@ -11,11 +11,11 @@ export interface LineChartProps {
   limit: number;
   options: LineChartOptions;
   segmentColorCallback: (
-      datasetIndex: number,
-      p1DataIndex: number,
-      data: LineChartData[],
-      palette: any,
-      limit: number,
+    datasetIndex: number,
+    p1DataIndex: number,
+    data: LineChartData[],
+    palette: any,
+    limit: number
   ) => void;
 }
 
@@ -23,15 +23,15 @@ const LineChart: React.FC<LineChartProps> = ({
   data,
   id,
 
-    labels,
+  labels,
   limit,
   options,
-                                               segmentColorCallback,
+  segmentColorCallback,
 }) => {
   const chartId = `line-chart-${id}`;
 
   // @ts-ignore
-  const {palette} = useTheme();
+  const { palette } = useTheme();
 
   useEffect(() => {
     // @ts-ignore
@@ -51,13 +51,13 @@ const LineChart: React.FC<LineChartProps> = ({
             // pointStyle: false,
             segment: {
               borderColor: (ctx: ScriptableLineSegmentContext) =>
-                  segmentColorCallback(
-                      ctx.datasetIndex,
-                      ctx.p1DataIndex,
-                      data,
-                      palette,
-                      limit,
-                  ),
+                segmentColorCallback(
+                  ctx.datasetIndex,
+                  ctx.p1DataIndex,
+                  data,
+                  palette,
+                  limit
+                ),
             },
             spanGaps: true,
           };

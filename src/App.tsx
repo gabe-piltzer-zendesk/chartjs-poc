@@ -7,12 +7,12 @@ import annotationPlugin from 'chartjs-plugin-annotation';
 import { DemoApp } from './utils/types';
 
 const ButtonContainer = styled.div`
-  padding: 20px;
-  
+  padding: 20px 40px;
+
   button {
-    margin-right: 10px
+    margin-right: 10px;
   }
-`
+`;
 
 const StorageUsageContainer = styled.div`
   padding-left: 20px;
@@ -24,27 +24,33 @@ const StorageUsageContainer = styled.div`
 `;
 
 const App: React.FC = () => {
-    const [demoApp, setDemoApp] = useState<DemoApp>('CHARTJS');
-    const {fonts} = DEFAULT_THEME;
+  const [demoApp, setDemoApp] = useState<DemoApp>('REACTCHARTJS2');
+  const { fonts } = DEFAULT_THEME;
 
-    // Register chart components and set options for all charts
-    Chart.register(...registerables, annotationPlugin);
-    Chart.defaults.font = {
-        family: fonts.system,
-        size: 14, // Theme font sizes are strings (e.g. '14px') not numbers
-    };
+  // Register chart components and set options for all charts
+  Chart.register(...registerables, annotationPlugin);
+  Chart.defaults.font = {
+    family: fonts.system,
+    size: 14, // Theme font sizes are strings (e.g. '14px') not numbers
+  };
 
-    return (
-        <ThemeProvider theme={{...DEFAULT_THEME, rtl: false}}>
-            <ButtonContainer>
-                <button type='button' onClick={() => setDemoApp('CHARTJS')}>Chart.js</button>
-                <button type='button' onClick={() => setDemoApp('REACTCHARTJS2')}>react-chartjs-2</button>
-            </ButtonContainer>
-            <StorageUsageContainer>
-                <StorageUsage demoApp={demoApp} />
-            </StorageUsageContainer>
-        </ThemeProvider>
-    );
+  return (
+    <ThemeProvider theme={{ ...DEFAULT_THEME, rtl: false }}>
+      <ButtonContainer>
+        <button type="button" onClick={() => setDemoApp('CHARTJS')}>
+          Chart.js
+        </button>
+        <button type="button" onClick={() => setDemoApp('REACTCHARTJS2')}>
+          react-chartjs-2
+        </button>
+        {demoApp === 'CHARTJS' && <span>Rendering Chart.js</span>}
+        {demoApp === 'REACTCHARTJS2' && <span>Rendering react-chartjs-2</span>}
+      </ButtonContainer>
+      <StorageUsageContainer>
+        <StorageUsage demoApp={demoApp} />
+      </StorageUsageContainer>
+    </ThemeProvider>
+  );
 };
 
 export default App;

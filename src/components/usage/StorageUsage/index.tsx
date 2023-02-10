@@ -86,7 +86,7 @@ const StorageUsage: React.FC<Props> = ({ demoApp }) => {
           borderColor: (ctx: ScriptableLineSegmentContext) =>
             getSegmentColor(
               ctx.datasetIndex,
-              ctx.p0DataIndex,
+              ctx.p1DataIndex,
               chartJSData,
               palette,
               LIMIT
