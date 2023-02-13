@@ -49,13 +49,13 @@ const StorageUsage: React.FC<Props> = ({ demoApp }) => {
 
   const chartId = nanoid();
   const storageData = oneYearMonthlyData;
-  const values = storageData.map((data) => data.storageUsed);
+  const values = storageData.map((data) => data.value);
   const usageLineData: LineChartData = {
     label: 'Usage',
     values,
   };
   const labels = storageData.map((data) =>
-    new Date(data.storageDate).toLocaleDateString()
+    new Date(data.date).toLocaleDateString()
   );
 
   // Chart.js
@@ -99,13 +99,11 @@ const StorageUsage: React.FC<Props> = ({ demoApp }) => {
   const xAxisLabel = 'Date';
   const yAxisLabel = 'Storage (GB)';
   const lastStorage = storageData[storageData.length - 1];
-  const lastStorageDate = new Date(
-    lastStorage.storageDate
-  ).toLocaleDateString();
+  const lastStorageDate = new Date(lastStorage.date).toLocaleDateString();
   const options = getOptions(
     fontWeights,
     lastStorageDate,
-    lastStorage.storageUsed,
+    lastStorage.value,
     LIMIT,
     palette,
     undefined,

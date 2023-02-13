@@ -1,15 +1,23 @@
 import {
   CoreChartOptions,
   DatasetChartOptions,
-  ElementChartOptions, LineControllerChartOptions,
+  ElementChartOptions,
+  LineControllerChartOptions,
   PluginChartOptions,
-  ScaleChartOptions
-} from "chart.js";
-import { _DeepPartialObject } from "chart.js/dist/types/utils";
+  ScaleChartOptions,
+} from 'chart.js';
+import { _DeepPartialObject } from 'chart.js/dist/types/utils';
 
 type DemoApp = 'CHARTJS' | 'REACTCHARTJS2';
 
-type LineChartOptions = _DeepPartialObject<CoreChartOptions<"line"> & ElementChartOptions<"line"> & PluginChartOptions<"line"> & DatasetChartOptions<"line"> & ScaleChartOptions<"line"> & LineControllerChartOptions>
+type LineChartOptions = _DeepPartialObject<
+  CoreChartOptions<'line'> &
+    ElementChartOptions<'line'> &
+    PluginChartOptions<'line'> &
+    DatasetChartOptions<'line'> &
+    ScaleChartOptions<'line'> &
+    LineControllerChartOptions
+>;
 
 interface LineChartData {
   annotationLabel?: string;
@@ -19,9 +27,9 @@ interface LineChartData {
 }
 
 interface StorageData {
+  date: string;
   id: string;
-  storageDate: string;
-  storageUsed: number;
+  value: number;
 }
 
 export { DemoApp, LineChartData, LineChartOptions, StorageData };
