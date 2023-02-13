@@ -6,11 +6,7 @@ import { nanoid } from 'nanoid';
 import { DemoApp, LineChartData } from '../../../utils/types';
 import { getOptions } from '../../charts/helpers';
 import { useTheme } from 'styled-components';
-import {
-  ScriptableContext,
-  ScriptableLineSegmentContext,
-  Tick,
-} from 'chart.js';
+import { ScriptableContext, ScriptableLineSegmentContext } from 'chart.js';
 import { ChartData } from 'chart.js/dist/types';
 
 const LIMIT = 370;
