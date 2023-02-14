@@ -24,7 +24,7 @@ const StorageUsageContainer = styled.div`
 `;
 
 const App: React.FC = () => {
-  const [demoApp, setDemoApp] = useState<DemoApp>('REACTCHARTJS2');
+  const [demoApp, setDemoApp] = useState<DemoApp>('CHARTJS');
   const { fonts, rtl } = DEFAULT_THEME;
 
   // Register chart components and set options for all charts

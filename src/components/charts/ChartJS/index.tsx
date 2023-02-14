@@ -1,68 +1,27 @@
 import React, { memo, useEffect } from 'react';
 import { Chart } from 'chart.js';
-import { LineChartData, LineChartOptions } from '../../../utils/types';
-import { useTheme } from 'styled-components';
-import { ScriptableLineSegmentContext } from 'chart.js/dist/types';
+import { LineChartOptions } from '../../../utils/types';
+import { ChartData } from 'chart.js/dist/types';
 
-export interface LineChartProps {
+export interface Props {
   id: string;
-  data: LineChartData[];
-  labels: string[];
-  limit: number;
+  data: ChartData<'line', number[], string>;
   options: LineChartOptions;
-  segmentColorCallback: (
-    datasetIndex: number,
-    p1DataIndex: number,
-    data: LineChartData[],
-    palette: any,
-    limit: number
-  ) => void;
 }
 
-const LineChart: React.FC<LineChartProps> = ({
+const LineChart: React.FC<Props> = ({
   data,
   id,
 
-  labels,
-  limit,
   options,
-  segmentColorCallback,
 }) => {
   const chartId = `line-chart-${id}`;
-
-  // @ts-ignore
-  const { palette } = useTheme();
 
   useEffect(() => {
     // @ts-ignore
     const chart = new Chart(document.getElementById(chartId), {
       type: 'line',
-      data: {
-        labels,
-        datasets: data.map((d) => {
-          return {
-            borderColor: d.borderColor,
-            borderWidth: 3,
-            data: d.values,
-            fill: false,
-            label: d.label,
-            // pointHoverBorderColor: 'black',
-            pointHoverRadius: 6,
-            // pointStyle: false,
-            segment: {
-              borderColor: (ctx: ScriptableLineSegmentContext) =>
-                segmentColorCallback(
-                  ctx.datasetIndex,
-                  ctx.p0DataIndex,
-                  data,
-                  palette,
-                  limit
-                ),
-            },
-            spanGaps: true,
-          };
-        }),
-      },
+      data,
       options,
     });
 

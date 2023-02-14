@@ -1,18 +1,19 @@
 import React, { memo } from 'react';
 import { LIMIT, MONTHLY_DATA } from './data';
-import { getSegmentColor } from '../../../utils/helpers';
 import ChartJSLineChart from '../../charts/ChartJS';
 import { useTheme } from 'styled-components';
 import { nanoid } from 'nanoid';
 import { LineChartData, LineChartOptions } from '../../../utils/types';
 import { getPlugins } from '../../charts/options/plugins';
 import { getScales } from '../../charts/options/scales';
+import { ChartData } from 'chart.js/dist/types';
+import { getDataset } from '../../charts/options/dataset';
 
 const StorageUsageChartJS: React.FC = () => {
   // @ts-ignore
   const { fontWeights, palette, rtl } = useTheme();
 
-  // Data
+  // API data
   const chartId = nanoid();
   const storageData = MONTHLY_DATA;
   const values = storageData.map((data) => data.value);
@@ -20,7 +21,6 @@ const StorageUsageChartJS: React.FC = () => {
     label: 'Usage',
     values,
   };
-  const chartJSData: LineChartData[] = [usageLineData];
 
   // X-Axis labels
   let showLabel = true;
@@ -30,6 +30,15 @@ const StorageUsageChartJS: React.FC = () => {
     showLabel = !showLabel;
     return new Date(data.date).toLocaleDateString();
   });
+
+  // Chart data
+  const lineChartData: LineChartData[] = [usageLineData];
+  const chartData: ChartData<'line', number[], string> = {
+    labels,
+    datasets: lineChartData.map((d) =>
+      getDataset(d.values, d.label, lineChartData, palette)
+    ),
+  };
 
   // Options
   const xAxisLabel = 'Date';
@@ -60,12 +69,9 @@ const StorageUsageChartJS: React.FC = () => {
 
   return (
     <ChartJSLineChart
-      data={chartJSData}
+      data={chartData}
       id={chartId}
-      labels={labels}
-      limit={LIMIT}
       options={options}
-      segmentColorCallback={getSegmentColor}
     ></ChartJSLineChart>
   );
 };

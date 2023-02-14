@@ -1,28 +1,24 @@
 import React, { memo } from 'react';
 import ReactChartJS2LineChart from '../../charts/ReactChartJS2';
-import {
-  ChartData,
-  ScriptableContext,
-  ScriptableLineSegmentContext,
-} from 'chart.js';
+import { ChartData } from 'chart.js';
 import { LIMIT, MONTHLY_DATA } from './data';
 import { LineChartData, LineChartOptions } from '../../../utils/types';
 import { useTheme } from 'styled-components';
 import { getPlugins } from '../../charts/options/plugins';
 import { getScales } from '../../charts/options/scales';
-import { getColorByLimit, getSegmentColor } from '../../../utils/helpers';
+import { getDataset } from '../../charts/options/dataset';
 
 const StorageUsageReactChartJS: React.FC = () => {
   // @ts-ignore
   const { fontWeights, palette, rtl } = useTheme();
 
+  // API data
   const storageData = MONTHLY_DATA;
   const values = storageData.map((data) => data.value);
   const usageLineData: LineChartData = {
     label: 'Usage',
     values,
   };
-  const chartJSData: LineChartData[] = [usageLineData];
 
   // X-Axis labels
   let showLabel = true;
@@ -33,38 +29,13 @@ const StorageUsageReactChartJS: React.FC = () => {
     return new Date(data.date).toLocaleDateString();
   });
 
-  const reactChartJSData: ChartData<'line', number[], string> = {
+  // Chart data
+  const lineChartData: LineChartData[] = [usageLineData];
+  const chartData: ChartData<'line', number[], string> = {
     labels,
-    datasets: chartJSData.map((data) => {
-      return {
-        label: data.label,
-        data: data.values,
-        pointBackgroundColor: (ctx: ScriptableContext<'line'>) =>
-          getColorByLimit(
-            LIMIT,
-            LIMIT * 0.7,
-            ctx.dataset.data[ctx.dataIndex] as number,
-            palette
-          ),
-        pointBorderColor: (ctx: ScriptableContext<'line'>) =>
-          getColorByLimit(
-            LIMIT,
-            LIMIT * 0.7,
-            ctx.dataset.data[ctx.dataIndex] as number,
-            palette
-          ),
-        segment: {
-          borderColor: (ctx: ScriptableLineSegmentContext) =>
-            getSegmentColor(
-              ctx.datasetIndex,
-              ctx.p0DataIndex,
-              chartJSData,
-              palette,
-              LIMIT
-            ),
-        },
-      };
-    }),
+    datasets: lineChartData.map((d) =>
+      getDataset(d.values, d.label, lineChartData, palette)
+    ),
   };
 
   // Options
@@ -96,7 +67,7 @@ const StorageUsageReactChartJS: React.FC = () => {
 
   return (
     <ReactChartJS2LineChart
-      data={reactChartJSData}
+      data={chartData}
       dir={rtl ? 'rtl' : 'ltr'}
       options={options}
     ></ReactChartJS2LineChart>
