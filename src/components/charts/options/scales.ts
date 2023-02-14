@@ -1,6 +1,5 @@
 import { _DeepPartialObject } from 'chart.js/dist/types/utils';
-import { ScaleChartOptions } from 'chart.js';
-import { Tick } from 'chart.js/dist/types';
+import { ScaleChartOptions, Tick } from 'chart.js';
 import { StorageData } from '../../../utils/types';
 
 export const getScales = (

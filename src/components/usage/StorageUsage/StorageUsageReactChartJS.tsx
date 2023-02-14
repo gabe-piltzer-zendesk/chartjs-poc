@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
-import ReactChartJS2LineChart from '../../charts/ReactChartJS2/LineChart';
-import { ChartData } from 'chart.js';
+import ReactChartJS2LineChart from '../../charts/ReactChartJS2';
 import {
+  ChartData,
   ScriptableContext,
   ScriptableLineSegmentContext,
-} from 'chart.js/dist/types';
+} from 'chart.js';
 import { LIMIT, MONTHLY_DATA } from './data';
 import { LineChartData, LineChartOptions } from '../../../utils/types';
 import { useTheme } from 'styled-components';
@@ -90,7 +90,7 @@ const StorageUsageReactChartJS: React.FC = () => {
   return (
     <ReactChartJS2LineChart
       data={reactChartJSData}
-      dir={'rtl'}
+      dir={'ltr'}
       options={options}
     ></ReactChartJS2LineChart>
   );

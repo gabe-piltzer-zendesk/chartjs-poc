@@ -33,7 +33,7 @@ const App: React.FC = () => {
     family: fonts.system,
     size: 14, // Theme font sizes are strings (e.g. '14px') not numbers
   };
-  Chart.defaults.locale = 'ar';
+  // Chart.defaults.locale = 'ar';
 
   return (
     <ThemeProvider theme={{ ...DEFAULT_THEME, rtl: false }}>

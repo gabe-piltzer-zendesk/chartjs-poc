@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { LIMIT, MONTHLY_DATA } from './data';
 import { getSegmentColor } from '../../../utils/helpers';
-import ChartJSLineChart from '../../charts/ChartJS/LineChart';
+import ChartJSLineChart from '../../charts/ChartJS';
 import { useTheme } from 'styled-components';
 import { nanoid } from 'nanoid';
 import { LineChartData, LineChartOptions } from '../../../utils/types';
