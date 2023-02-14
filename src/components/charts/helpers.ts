@@ -1,7 +1,8 @@
-import { LineChartOptions } from '../../utils/types';
-import { TooltipItem } from 'chart.js';
+import { LineChartOptions, StorageData } from '../../utils/types';
+import { Tick, TooltipItem } from 'chart.js';
 
 const getOptions = (
+  data: StorageData[],
   fontWeights: any,
   lastStorageDate: string,
   lastStorageValue: number,
@@ -93,6 +94,13 @@ const getOptions = (
       grid: {
         display: false,
       },
+      ticks: {
+        callback: (value: any, index: number, ticks: Tick[]) => {
+          return data[index].showLabel
+            ? new Date(data[index].date).toLocaleDateString()
+            : undefined;
+        },
+      },
       title: {
         display: true,
         font: {
@@ -103,6 +111,8 @@ const getOptions = (
       },
     },
     y: {
+      suggestedMin: 0, // TODO - don't hardcode
+      suggestedMax: 600, // TODO - don't hardcode
       title: {
         display: true,
         font: {

@@ -29,6 +29,7 @@ interface LineChartData {
 interface StorageData {
   date: string;
   id: string;
+  showLabel?: boolean; // Client only
   value: number;
 }
 

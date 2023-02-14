@@ -1,30 +1,6 @@
 import { StorageData } from '../../../utils/types';
 import { nanoid } from 'nanoid';
 
-const generateStorageUsageData = (
-  numberOfPoints: number,
-  limit: number
-): StorageData[] => {
-  const data: StorageData[] = [];
-
-  for (let i = 0; i < numberOfPoints; i++) {
-    let storageUsed = i * (19 + Math.random());
-
-    // Colors are set by line segment, stop one at the limit to get an exact color break at that threshold
-    if (storageUsed > limit && data[i - 1].value < limit) {
-      storageUsed = limit;
-    }
-
-    data.push({
-      id: nanoid(),
-      date: `2022-11-${i}T14:48:00.000Z`,
-      value: storageUsed,
-    });
-  }
-
-  return data;
-};
-
 const oneYearMonthlyData: StorageData[] = [
   {
     id: nanoid(),
@@ -61,13 +37,13 @@ const oneYearMonthlyData: StorageData[] = [
     date: `2022-09-01T14:48:00.000Z`,
     value: 341.2,
   },
-  // TODO - Fake datapoint, either calculated by the server or client
-  // Does hiding the tick/label throw it off?
-  {
-    id: nanoid(),
-    date: `2022-09-06T14:48:00.000Z`,
-    value: 370.0,
-  },
+  // // TODO - Fake datapoint, either calculated by the server or client
+  // // Does hiding the tick/label throw it off?
+  // {
+  //   id: nanoid(),
+  //   date: `2022-09-06T14:48:00.000Z`,
+  //   value: 370.0,
+  // },
   {
     id: nanoid(),
     date: `2022-10-01T14:48:00.000Z`,
@@ -105,4 +81,4 @@ const oneYearMonthlyData: StorageData[] = [
   },
 ];
 
-export { generateStorageUsageData, oneYearMonthlyData };
+export { oneYearMonthlyData };

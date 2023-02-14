@@ -54,9 +54,15 @@ const StorageUsage: React.FC<Props> = ({ demoApp }) => {
     label: 'Usage',
     values,
   };
-  const labels = storageData.map((data) =>
-    new Date(data.date).toLocaleDateString()
-  );
+
+  // X-Axis labels
+  let showLabel = true;
+  const labels = storageData.map((data, index) => {
+    // Show every other label and the last one
+    data.showLabel = showLabel || index === storageData.length - 1;
+    showLabel = !showLabel;
+    return new Date(data.date).toLocaleDateString();
+  });
 
   // Chart.js
   const chartJSData: LineChartData[] = [usageLineData];
@@ -101,6 +107,7 @@ const StorageUsage: React.FC<Props> = ({ demoApp }) => {
   const lastStorage = storageData[storageData.length - 1];
   const lastStorageDate = new Date(lastStorage.date).toLocaleDateString();
   const options = getOptions(
+    storageData,
     fontWeights,
     lastStorageDate,
     lastStorage.value,
