@@ -8,7 +8,7 @@ import {
 } from 'chart.js';
 import { _DeepPartialObject } from 'chart.js/dist/types/utils';
 
-type DemoApp = 'CHARTJS' | 'REACTCHARTJS2';
+type DemoApp = 'CHARTJS' | 'CHARTJSPERF' | 'REACTCHARTJS2';
 
 type LineChartOptions = _DeepPartialObject<
   CoreChartOptions<'line'> &

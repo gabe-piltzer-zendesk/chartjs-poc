@@ -40,10 +40,16 @@ const App: React.FC = () => {
         <button type="button" onClick={() => setDemoApp('CHARTJS')}>
           Chart.js
         </button>
+        <button type="button" onClick={() => setDemoApp('CHARTJSPERF')}>
+          Chart.js Performance
+        </button>
         <button type="button" onClick={() => setDemoApp('REACTCHARTJS2')}>
           react-chartjs-2
         </button>
         {demoApp === 'CHARTJS' && <span>Rendering Chart.js</span>}
+        {demoApp === 'CHARTJSPERF' && (
+          <span>Rendering Chart.js Performance</span>
+        )}
         {demoApp === 'REACTCHARTJS2' && <span>Rendering react-chartjs-2</span>}
       </ButtonContainer>
       <StorageUsageContainer>
