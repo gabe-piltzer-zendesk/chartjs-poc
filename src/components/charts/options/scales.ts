@@ -32,8 +32,8 @@ export const getScales = (
       },
     },
     y: {
-      suggestedMin: 0, // TODO - don't hardcode
-      suggestedMax: 600, // TODO - don't hardcode
+      min: 0, // TODO - don't hardcode
+      max: 600, // TODO - don't hardcode
       title: {
         display: true,
         font: {

@@ -25,7 +25,7 @@ const StorageUsageContainer = styled.div`
 
 const App: React.FC = () => {
   const [demoApp, setDemoApp] = useState<DemoApp>('REACTCHARTJS2');
-  const { fonts } = DEFAULT_THEME;
+  const { fonts, rtl } = DEFAULT_THEME;
 
   // Register chart components and set options for all charts
   Chart.register(...registerables, annotationPlugin);
@@ -33,10 +33,9 @@ const App: React.FC = () => {
     family: fonts.system,
     size: 14, // Theme font sizes are strings (e.g. '14px') not numbers
   };
-  // Chart.defaults.locale = 'ar';
 
   return (
-    <ThemeProvider theme={{ ...DEFAULT_THEME, rtl: false }}>
+    <ThemeProvider theme={{ ...DEFAULT_THEME, rtl }}>
       <ButtonContainer>
         <button type="button" onClick={() => setDemoApp('CHARTJS')}>
           Chart.js
