@@ -10,7 +10,7 @@ import { getScales } from '../../charts/options/scales';
 
 const StorageUsageChartJS: React.FC = () => {
   // @ts-ignore
-  const { fontWeights, palette } = useTheme();
+  const { fontWeights, palette, rtl } = useTheme();
 
   // Data
   const chartId = nanoid();
@@ -43,9 +43,16 @@ const StorageUsageChartJS: React.FC = () => {
     lastStorage.value,
     LIMIT,
     palette,
+    rtl,
     undefined
   );
-  const scales = getScales(storageData, fontWeights, xAxisLabel, yAxisLabel);
+  const scales = getScales(
+    storageData,
+    fontWeights,
+    rtl,
+    xAxisLabel,
+    yAxisLabel
+  );
   const options: LineChartOptions = {
     ...plugins,
     ...scales,

@@ -10,18 +10,17 @@ interface Props {
 }
 
 const LineChart: React.FC<Props> = ({ data, dir, options }) => {
+  // This is used for RTL but it isn't quite working yet...
   const chartRef = useRef<any>(null);
-
   useEffect(() => {
     const chart = chartRef.current;
 
-    // Not working yet...
     if (chart) {
       chart.canvas.dir = dir;
     }
   }, [dir]);
 
-  return <Line data={data} options={options} ref={chartRef}></Line>;
+  return <Line data={data} options={options} ref={chartRef} />;
 };
 
 export default memo(LineChart);

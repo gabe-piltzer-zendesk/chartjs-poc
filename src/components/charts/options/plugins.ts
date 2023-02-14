@@ -7,6 +7,7 @@ export const getPlugins = (
   lastStorageValue: number,
   limit: number,
   palette: any,
+  rtl: boolean,
   title: string | undefined
 ): _DeepPartialObject<PluginChartOptions<'line'>> => ({
   plugins: {
@@ -83,6 +84,7 @@ export const getPlugins = (
         size: 12,
       },
       padding: 10,
+      rtl,
       titleColor: palette.red[600],
     },
   },

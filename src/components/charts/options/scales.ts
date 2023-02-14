@@ -5,6 +5,7 @@ import { StorageData } from '../../../utils/types';
 export const getScales = (
   data: StorageData[],
   fontWeights: any,
+  rtl: boolean,
   xAxisLabel: string,
   yAxisLabel: string
 ): _DeepPartialObject<ScaleChartOptions<'line'>> => ({
@@ -13,6 +14,7 @@ export const getScales = (
       grid: {
         display: false,
       },
+      reverse: rtl,
       ticks: {
         callback: (value: any, index: number, ticks: Tick[]) => {
           return data[index].showLabel

@@ -14,7 +14,7 @@ import { getColorByLimit, getSegmentColor } from '../../../utils/helpers';
 
 const StorageUsageReactChartJS: React.FC = () => {
   // @ts-ignore
-  const { fontWeights, palette } = useTheme();
+  const { fontWeights, palette, rtl } = useTheme();
 
   const storageData = MONTHLY_DATA;
   const values = storageData.map((data) => data.value);
@@ -79,9 +79,16 @@ const StorageUsageReactChartJS: React.FC = () => {
     lastStorage.value,
     LIMIT,
     palette,
+    rtl,
     undefined
   );
-  const scales = getScales(storageData, fontWeights, xAxisLabel, yAxisLabel);
+  const scales = getScales(
+    storageData,
+    fontWeights,
+    rtl,
+    xAxisLabel,
+    yAxisLabel
+  );
   const options: LineChartOptions = {
     ...plugins,
     ...scales,
@@ -90,7 +97,7 @@ const StorageUsageReactChartJS: React.FC = () => {
   return (
     <ReactChartJS2LineChart
       data={reactChartJSData}
-      dir={'ltr'}
+      dir={rtl ? 'rtl' : 'ltr'}
       options={options}
     ></ReactChartJS2LineChart>
   );
