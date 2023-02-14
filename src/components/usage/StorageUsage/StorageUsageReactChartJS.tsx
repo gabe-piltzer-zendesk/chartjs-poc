@@ -1,12 +1,15 @@
 import React, { memo } from 'react';
-import ChartJSLineChart from '../../charts/ChartJS/LineChart';
+import ReactChartJS2LineChart from '../../charts/ReactChartJS2/LineChart';
+import { ChartData } from 'chart.js';
+import {
+  ScriptableContext,
+  ScriptableLineSegmentContext,
+} from 'chart.js/dist/types';
 import { LIMIT, MONTHLY_DATA } from './data';
-import { nanoid } from 'nanoid';
-import { DemoApp, LineChartData, LineChartOptions } from '../../../utils/types';
+import { LineChartData, LineChartOptions } from '../../../utils/types';
 import { useTheme } from 'styled-components';
 import { getPlugins } from '../../charts/options/plugins';
 import { getScales } from '../../charts/options/scales';
-import StorageUsageReactChartJS from './StorageUsageReactChartJS';
 
 const getColorByLimit = (
   limit: number,
@@ -36,21 +39,17 @@ const getSegmentColor = (
   return getColorByLimit(limit, threshold, value, palette);
 };
 
-interface Props {
-  demoApp: DemoApp;
-}
-
-const StorageUsage: React.FC<Props> = ({ demoApp }) => {
+const StorageUsageReactChartJS: React.FC = () => {
   // @ts-ignore
   const { fontWeights, palette } = useTheme();
 
-  const chartId = nanoid();
   const storageData = MONTHLY_DATA;
   const values = storageData.map((data) => data.value);
   const usageLineData: LineChartData = {
     label: 'Usage',
     values,
   };
+  const chartJSData: LineChartData[] = [usageLineData];
 
   // X-Axis labels
   let showLabel = true;
@@ -61,9 +60,41 @@ const StorageUsage: React.FC<Props> = ({ demoApp }) => {
     return new Date(data.date).toLocaleDateString();
   });
 
-  // Chart.js
-  const chartJSData: LineChartData[] = [usageLineData];
+  const reactChartJSData: ChartData<'line', number[], string> = {
+    labels,
+    datasets: chartJSData.map((data) => {
+      return {
+        label: data.label,
+        data: data.values,
+        pointBackgroundColor: (ctx: ScriptableContext<'line'>) =>
+          getColorByLimit(
+            LIMIT,
+            LIMIT * 0.7,
+            ctx.dataset.data[ctx.dataIndex] as number,
+            palette
+          ),
+        pointBorderColor: (ctx: ScriptableContext<'line'>) =>
+          getColorByLimit(
+            LIMIT,
+            LIMIT * 0.7,
+            ctx.dataset.data[ctx.dataIndex] as number,
+            palette
+          ),
+        segment: {
+          borderColor: (ctx: ScriptableLineSegmentContext) =>
+            getSegmentColor(
+              ctx.datasetIndex,
+              ctx.p0DataIndex,
+              chartJSData,
+              palette,
+              LIMIT
+            ),
+        },
+      };
+    }),
+  };
 
+  // Options
   const xAxisLabel = 'Date';
   const yAxisLabel = 'Storage (GB)';
   const lastStorage = storageData[storageData.length - 1];
@@ -84,20 +115,11 @@ const StorageUsage: React.FC<Props> = ({ demoApp }) => {
   };
 
   return (
-    <>
-      {demoApp === 'CHARTJS' && (
-        <ChartJSLineChart
-          data={chartJSData}
-          id={chartId}
-          labels={labels}
-          limit={LIMIT}
-          options={options}
-          segmentColorCallback={getSegmentColor}
-        ></ChartJSLineChart>
-      )}
-      {demoApp === 'REACTCHARTJS2' && <StorageUsageReactChartJS />}
-    </>
+    <ReactChartJS2LineChart
+      data={reactChartJSData}
+      dir={'rtl'}
+      options={options}
+    ></ReactChartJS2LineChart>
   );
 };
-
-export default memo(StorageUsage);
+export default memo(StorageUsageReactChartJS);

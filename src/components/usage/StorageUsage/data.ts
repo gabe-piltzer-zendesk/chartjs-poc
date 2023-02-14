@@ -1,7 +1,7 @@
 import { StorageData } from '../../../utils/types';
 import { nanoid } from 'nanoid';
 
-const oneYearMonthlyData: StorageData[] = [
+const MONTHLY_DATA: StorageData[] = [
   {
     id: nanoid(),
     date: `2022-03-01T14:48:00.000Z`,
@@ -81,4 +81,6 @@ const oneYearMonthlyData: StorageData[] = [
   },
 ];
 
-export { oneYearMonthlyData };
+const LIMIT = 370;
+
+export { MONTHLY_DATA, LIMIT };

@@ -1,17 +1,14 @@
-import { LineChartOptions, StorageData } from '../../utils/types';
-import { Tick, TooltipItem } from 'chart.js';
+import { PluginChartOptions, TooltipItem } from 'chart.js/dist/types';
+import { _DeepPartialObject } from 'chart.js/dist/types/utils';
 
-const getOptions = (
-  data: StorageData[],
+export const getPlugins = (
   fontWeights: any,
   lastStorageDate: string,
   lastStorageValue: number,
   limit: number,
   palette: any,
-  title: string | undefined,
-  xAxisLabel: string,
-  yAxisLabel: string
-): LineChartOptions => ({
+  title: string | undefined
+): _DeepPartialObject<PluginChartOptions<'line'>> => ({
   plugins: {
     annotation: {
       annotations: {
@@ -26,7 +23,7 @@ const getOptions = (
           type: 'label',
           xValue: lastStorageDate,
           xAdjust: -70,
-          yValue: limit + 10,
+          yValue: limit + 15,
           content: `${limit} GB limit`, // Annotation labels should be dynamic, could come in with the data object
           color: palette.grey[600],
         },
@@ -34,7 +31,7 @@ const getOptions = (
           type: 'label',
           xValue: lastStorageDate,
           xAdjust: -70,
-          yValue: lastStorageValue + 10,
+          yValue: lastStorageValue + 15,
           content: `${lastStorageValue} GB used`,
           color: palette.red[600],
           font: {
@@ -89,40 +86,4 @@ const getOptions = (
       titleColor: palette.red[600],
     },
   },
-  scales: {
-    x: {
-      grid: {
-        display: false,
-      },
-      ticks: {
-        callback: (value: any, index: number, ticks: Tick[]) => {
-          return data[index].showLabel
-            ? new Date(data[index].date).toLocaleDateString()
-            : undefined;
-        },
-      },
-      title: {
-        display: true,
-        font: {
-          weight: fontWeights.bold,
-        },
-        padding: 10,
-        text: xAxisLabel,
-      },
-    },
-    y: {
-      suggestedMin: 0, // TODO - don't hardcode
-      suggestedMax: 600, // TODO - don't hardcode
-      title: {
-        display: true,
-        font: {
-          weight: fontWeights.bold,
-        },
-        padding: 20,
-        text: yAxisLabel,
-      },
-    },
-  },
 });
-
-export { getOptions };
