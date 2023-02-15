@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import ReactChartJS2LineChart from '../../charts/ReactChartJS2';
 import { ChartData } from 'chart.js';
-import { LIMIT, MONTHLY_DATA } from './data';
+import { LIMIT, MONTHLY_DATA } from '../../../utils/data';
 import { LineChartData, LineChartOptions } from '../../../utils/types';
 import { useTheme } from 'styled-components';
 import { getPlugins } from '../../charts/options/plugins';
@@ -13,7 +13,7 @@ const StorageUsageReactChartJS: React.FC = () => {
   const { fontWeights, palette, rtl } = useTheme();
 
   // API data
-  const storageData = MONTHLY_DATA;
+  const storageData = [...MONTHLY_DATA];
   const values = storageData.map((data) => data.value);
   const usageLineData: LineChartData = {
     label: 'Usage',

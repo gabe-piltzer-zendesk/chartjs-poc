@@ -4,17 +4,13 @@ import { LineChartOptions } from '../../../utils/types';
 import { ChartData } from 'chart.js/dist/types';
 
 export interface Props {
-  id: string;
   data: ChartData<'line', number[], string>;
+  dir: 'ltr' | 'rtl';
+  id: string;
   options: LineChartOptions;
 }
 
-const LineChart: React.FC<Props> = ({
-  data,
-  id,
-
-  options,
-}) => {
+const LineChart: React.FC<Props> = ({ data, dir, id, options }) => {
   const chartId = `line-chart-${id}`;
 
   useEffect(() => {
@@ -32,7 +28,7 @@ const LineChart: React.FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <canvas id={chartId}></canvas>;
+  return <canvas aria-label="Line chart" dir={dir} id={chartId}></canvas>;
 };
 
 export default memo(LineChart);

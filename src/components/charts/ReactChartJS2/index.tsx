@@ -10,13 +10,13 @@ interface Props {
 }
 
 const LineChart: React.FC<Props> = ({ data, dir, options }) => {
-  // This is used for RTL but it isn't quite working yet...
+  // This is used for RTL and is WIP
   const chartRef = useRef<any>(null);
   useEffect(() => {
     const chart = chartRef.current;
-
     if (chart) {
       chart.canvas.dir = dir;
+      chart.canvas.ariaLabel = 'Line chart';
     }
   }, [dir]);
 

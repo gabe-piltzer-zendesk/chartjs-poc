@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { LIMIT, MONTHLY_DATA } from './data';
+import { LIMIT, MONTHLY_DATA } from '../../../utils/data';
 import ChartJSLineChart from '../../charts/ChartJS';
 import { useTheme } from 'styled-components';
 import { nanoid } from 'nanoid';
@@ -15,7 +15,7 @@ const StorageUsageChartJS: React.FC = () => {
 
   // API data
   const chartId = nanoid();
-  const storageData = MONTHLY_DATA;
+  const storageData = [...MONTHLY_DATA];
   const values = storageData.map((data) => data.value);
   const usageLineData: LineChartData = {
     label: 'Usage',
@@ -70,6 +70,7 @@ const StorageUsageChartJS: React.FC = () => {
   return (
     <ChartJSLineChart
       data={chartData}
+      dir={rtl ? 'rtl' : 'ltr'}
       id={chartId}
       options={options}
     ></ChartJSLineChart>

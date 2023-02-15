@@ -1,5 +1,46 @@
-import { StorageData } from '../../../utils/types';
+import { StorageData } from './types';
 import { nanoid } from 'nanoid';
+
+const generateYearData = (
+  begDate: Date,
+  begStorage: number,
+  endStorage: number
+): StorageData[] => {
+  const data: StorageData[] = [];
+  const days = 365;
+  const evenStorage = (endStorage - begStorage) / days;
+
+  let value = begStorage;
+
+  for (let i = 1; i <= days; i++) {
+    let date = new Date(begDate);
+    date.setDate(begDate.getDate() + i);
+    value = value + evenStorage * (Math.random() + 0.5);
+
+    data.push({
+      id: nanoid(),
+      date: date.toISOString(),
+      value,
+    });
+  }
+
+  return data;
+};
+
+const bucketYearDataByMonth = (allData: StorageData[]): StorageData[] => {
+  const data: StorageData[] = [];
+
+  allData.forEach((d) => {
+    const date = new Date(d.date);
+
+    // Grab the first day of each month
+    if (date.getDate() === 1) {
+      data.push(d);
+    }
+  });
+
+  return data;
+};
 
 const MONTHLY_DATA: StorageData[] = [
   {
@@ -83,4 +124,4 @@ const MONTHLY_DATA: StorageData[] = [
 
 const LIMIT = 370;
 
-export { MONTHLY_DATA, LIMIT };
+export { bucketYearDataByMonth, generateYearData, MONTHLY_DATA, LIMIT };

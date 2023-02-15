@@ -4,7 +4,7 @@ import {
   ScriptableLineSegmentContext,
 } from 'chart.js/dist/types';
 import { getColorByLimit, getSegmentColor } from '../../../utils/helpers';
-import { LIMIT } from '../../usage/StorageUsage/data';
+import { LIMIT } from '../../../utils/data';
 import { LineChartData } from '../../../utils/types';
 
 export const getDataset = (
