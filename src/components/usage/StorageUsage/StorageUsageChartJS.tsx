@@ -1,5 +1,9 @@
 import React, { memo } from 'react';
-import { LIMIT, MONTHLY_DATA } from '../../../utils/data';
+import {
+  bucketYearDataByMonth,
+  generateYearData,
+  LIMIT,
+} from '../../../utils/data';
 import ChartJSLineChart from '../../charts/ChartJS';
 import { useTheme } from 'styled-components';
 import { nanoid } from 'nanoid';
@@ -12,10 +16,12 @@ import { getDataset } from '../../charts/options/dataset';
 const StorageUsageChartJS: React.FC = () => {
   // @ts-ignore
   const { fontWeights, palette, rtl } = useTheme();
+  const chartId = nanoid();
 
   // API data
-  const chartId = nanoid();
-  const storageData = [...MONTHLY_DATA];
+  const begDate = new Date(2022, 2, 1);
+  const allData = generateYearData(begDate, 0, 600);
+  const storageData = bucketYearDataByMonth(allData);
   const values = storageData.map((data) => data.value);
   const usageLineData: LineChartData = {
     label: 'Usage',

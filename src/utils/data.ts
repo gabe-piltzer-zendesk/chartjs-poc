@@ -8,14 +8,14 @@ const generateYearData = (
 ): StorageData[] => {
   const data: StorageData[] = [];
   const days = 365;
-  const evenStorage = (endStorage - begStorage) / days;
 
   let value = begStorage;
 
   for (let i = 1; i <= days; i++) {
     let date = new Date(begDate);
     date.setDate(begDate.getDate() + i);
-    value = value + evenStorage * (Math.random() + 0.5);
+    // Random value between begStorage and endStorage
+    value = Math.random() * (endStorage - begStorage) + begStorage;
 
     data.push({
       id: nanoid(),

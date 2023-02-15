@@ -28,17 +28,17 @@ export const getPlugins = (
           content: `${limit} GB limit`, // Annotation labels should be dynamic, could come in with the data object
           color: palette.grey[600],
         },
-        usageLineLabel: {
-          type: 'label',
-          xValue: lastStorageDate,
-          xAdjust: -70,
-          yValue: lastStorageValue + 15,
-          content: `${lastStorageValue} GB used`,
-          color: palette.red[600],
-          font: {
-            weight: fontWeights.bold,
-          },
-        },
+        // usageLineLabel: {
+        //   type: 'label',
+        //   xValue: lastStorageDate,
+        //   xAdjust: -70,
+        //   yValue: lastStorageValue + 15,
+        //   content: `${lastStorageValue} GB used`,
+        //   color: palette.red[600],
+        //   font: {
+        //     weight: fontWeights.bold,
+        //   },
+        // },
       },
     },
     legend: {
