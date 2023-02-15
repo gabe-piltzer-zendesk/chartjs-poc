@@ -3,11 +3,16 @@ import Performance from '../charts/ChartJS/ChartJSPerformance';
 import styled from 'styled-components';
 
 const StyledSelect = styled.select`
-  margin-left: 20px;
+  margin: 0 20px;
 `;
 
 const PerformanceWrapper: React.FC = () => {
   const [count, setCount] = useState(10);
+  const [renderTimeMS, setRenderTimeMS] = useState(0);
+
+  const renderCompleteHandler = (timeMS: number) => {
+    setRenderTimeMS(timeMS);
+  };
 
   return (
     <>
@@ -23,8 +28,9 @@ const PerformanceWrapper: React.FC = () => {
           <option value="500">500</option>
           <option value="1000">1000</option>
         </StyledSelect>
+        <span>Rendered in {renderTimeMS} MS</span>
       </div>
-      <Performance count={count} />
+      <Performance count={count} onRenderComplete={renderCompleteHandler} />
     </>
   );
 };
