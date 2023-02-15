@@ -1,21 +1,25 @@
 import { StorageData } from './types';
 import { nanoid } from 'nanoid';
 
+const generateRandomValue = (min: number, max: number): number =>
+  Math.random() * (max - min) + min;
+
 const generateYearData = (
   begDate: Date,
   begStorage: number,
   endStorage: number
 ): StorageData[] => {
   const data: StorageData[] = [];
-  const days = 365;
+
+  // Get a full year plus the current month
+  const days = 365 + new Date().getDate() - 1;
 
   let value = begStorage;
 
   for (let i = 1; i <= days; i++) {
     let date = new Date(begDate);
     date.setDate(begDate.getDate() + i);
-    // Random value between begStorage and endStorage
-    value = Math.random() * (endStorage - begStorage) + begStorage;
+    value = generateRandomValue(begStorage, endStorage);
 
     data.push({
       id: nanoid(),
@@ -38,6 +42,9 @@ const bucketYearDataByMonth = (allData: StorageData[]): StorageData[] => {
       data.push(d);
     }
   });
+
+  // Grab today
+  data.push(allData[allData.length - 1]);
 
   return data;
 };

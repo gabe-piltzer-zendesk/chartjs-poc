@@ -61,18 +61,18 @@ export const getPlugins = (
           const value = ctx.dataset.data[ctx.dataIndex] as number;
           const diff = value - limit;
           if (diff > 0) {
-            return `${Math.abs(diff).toFixed(1)} GB over ${limit} GB limit`;
+            return `${Math.abs(diff).toFixed(1)} over ${limit} GB limit`;
           } else if (diff === 0) {
             return `${limit} GB limit met`;
           } else {
-            return `${Math.abs(diff).toFixed(
-              1
-            )} GB until ${limit} GB limit is met`;
+            return `${Math.abs(diff).toFixed(1)} of ${limit} GB remaining`;
           }
         },
         title: (ctx: TooltipItem<'line'>[]) => {
           const item = ctx[0];
-          return `${item.dataset.data[item.dataIndex]} GB used`;
+          return `${Math.abs(
+            item.dataset.data[item.dataIndex] as number
+          ).toFixed(1)} GB used`;
         },
       },
       displayColors: false,

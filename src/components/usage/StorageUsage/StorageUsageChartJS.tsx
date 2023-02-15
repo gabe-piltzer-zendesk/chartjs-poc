@@ -19,7 +19,7 @@ const StorageUsageChartJS: React.FC = () => {
   const chartId = nanoid();
 
   // API data
-  const begDate = new Date(2022, 2, 1);
+  const begDate = new Date(2022, new Date().getMonth(), 1);
   const allData = generateYearData(begDate, 0, 600);
   const storageData = bucketYearDataByMonth(allData);
   const values = storageData.map((data) => data.value);
